@@ -1,6 +1,6 @@
 # Pentaho_ebay_Dev_API
 This is for eBay API designed in Pentaho Kettle.  
-Use for Integration for small/middle/large merchants who does business with eBay
+Use to Integerate for small/middle/large merchants who does business with eBay
 
 Pre-requisites:
 1) You need Pentaho community edition software  (download from http://community.pentaho.com/  --> data integration)
