@@ -99,10 +99,10 @@
     <server>&#x24;&#x7b;SHOP_AT_LEMO_SERVER&#x7d;</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>shopatlemo</database>
-    <port>5432</port>
-    <username>shopatlemo</username>
-    <password>Encrypted 2be98afc86aa7f2e4a00cba64c79fae8b</password>
+    <database>&#x24;&#x7b;SHOP_AT_LEMO_DB&#x7d;</database>
+    <port>&#x24;&#x7b;SHOP_AT_LEMO_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;SHOP_AT_LEMO_USER&#x7d;</username>
+    <password>&#x24;&#x7b;SHOP_AT_LEMO_PASSWD&#x7d;</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -110,7 +110,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;SHOP_AT_LEMO_PORT&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -124,6 +124,32 @@
   <hop> <from>java script </from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   <hop> <from>HTTP Client</from><to>find stores xml</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>175</xloc>
+      <yloc>174</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>HTTP Client</name>
     <type>HTTP</type>
@@ -724,6 +750,120 @@
     </step>
 
   <step>
+    <name>java script </name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f; Author&#x3a; Karthik&#xd;&#xa;&#x2f;&#x2f; Description&#x3a;&#xd;&#xa;&#x2f;&#x2f; &#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#xd;&#xa;&#x2f;&#x2f; ONLY XML body will be accepted&#xd;&#xa;&#x2f;&#x2f; for trading api, we have to use Rest API Client.  &#xd;&#xa;&#x2f;&#x2f; We cannot use HTTP POST or HTTP CLient.  This is because&#xd;&#xa;&#x2f;&#x2f; we have to pass body and it must be in XML format.  &#xd;&#xa;&#x2f;&#x2f; HTTP POST and HTTP Client will not support body parsing.&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f; Generic variables for Trading, Finding and Shopping URL&#xd;&#xa;var SITEID &#x3d; 0&#x3b;&#xd;&#xa;var COMPATIBILITY_LEVEL &#x3d; 825&#x3b;&#xd;&#xa;var ItemID&#x3d;171384606321&#x3b;&#xd;&#xa;var prod_flag&#x3d;true&#x3b;&#xd;&#xa;var shop_name &#x3d; getVariable&#x28;&#x22;EBAY_SHOP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;prod_flag&#x29; &#x7b;&#xd;&#xa;	var DEV_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_DEV_NAME&#x22;, &#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var APP_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_APP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var CERT_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_CERT_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var eBayAuthToken &#x3d; getVariable&#x28;&#x22;EBAY_PROD_AUTH_TOKEN&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var shopping_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_SHOPPING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var trading_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_TRADING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var finding_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_FINDING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d; else &#x7b;&#xd;&#xa;	var DEV_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_DEV_NAME&#x22;, &#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var APP_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_APP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var CERT_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_CERT_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var eBayAuthToken &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_AUTH_TOKEN&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var shopping_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_SHOPPING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var trading_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_TRADING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var finding_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_FINDING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f; Local based variables&#xd;&#xa;var SERVICE_VERSION&#x3d;&#x22;1.8.0&#x22;&#x3b;&#xd;&#xa;var endpoint &#x3d; &#x22;findItemsIneBayStores&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;var operation&#x3d;&#x22;&#x3f;OPERATION-NAME&#x3d;&#x22; &#x2b; endpoint &#x2b; &#x22;&#x26;SERVICE-VERSION&#x3d;1.8.0&#x22;&#x3b;&#xd;&#xa;var query &#x3d; finding_api_url &#x2b; operation &#x2b; &#x22;&#x26;SECURITY-APPNAME&#x3d;&#x22; &#x2b; APP_NAME &#x2b; &#x22;&#x26;storeName&#x3d;&#x22; &#x2b; shop_name&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>SITEID</name>
+        <rename>SITEID</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>COMPATIBILITY_LEVEL</name>
+        <rename>COMPATIBILITY_LEVEL</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ItemID</name>
+        <rename>ItemID</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>prod_flag</name>
+        <rename>prod_flag</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>shop_name</name>
+        <rename>shop_name</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>DEV_NAME</name>
+        <rename>DEV_NAME</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>APP_NAME</name>
+        <rename>APP_NAME</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>CERT_NAME</name>
+        <rename>CERT_NAME</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>eBayAuthToken</name>
+        <rename>eBayAuthToken</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>shopping_api_url</name>
+        <rename>shopping_api_url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>trading_api_url</name>
+        <rename>trading_api_url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>finding_api_url</name>
+        <rename>finding_api_url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>SERVICE_VERSION</name>
+        <rename>SERVICE_VERSION</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>endpoint</name>
+        <rename>endpoint</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>query</name>
+        <rename>query</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>322</xloc>
+      <yloc>174</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>select</name>
     <type>SelectValues</type>
     <description/>
@@ -870,146 +1010,6 @@
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>753</xloc>
-      <yloc>174</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Generate Rows</name>
-    <type>RowGenerator</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>175</xloc>
-      <yloc>174</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>java script </name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Author&#x3a; Karthik&#xd;&#xa;&#x2f;&#x2f; Description&#x3a;&#xd;&#xa;&#x2f;&#x2f; &#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#x3d;&#xd;&#xa;&#x2f;&#x2f; ONLY XML body will be accepted&#xd;&#xa;&#x2f;&#x2f; for trading api, we have to use Rest API Client.  &#xd;&#xa;&#x2f;&#x2f; We cannot use HTTP POST or HTTP CLient.  This is because&#xd;&#xa;&#x2f;&#x2f; we have to pass body and it must be in XML format.  &#xd;&#xa;&#x2f;&#x2f; HTTP POST and HTTP Client will not support body parsing.&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f; Generic variables for Trading, Finding and Shopping URL&#xd;&#xa;var SITEID &#x3d; 0&#x3b;&#xd;&#xa;var COMPATIBILITY_LEVEL &#x3d; 825&#x3b;&#xd;&#xa;var ItemID&#x3d;171384606321&#x3b;&#xd;&#xa;var prod_flag&#x3d;true&#x3b;&#xd;&#xa;var shop_name &#x3d; getVariable&#x28;&#x22;EBAY_SHOP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;prod_flag&#x29; &#x7b;&#xd;&#xa;	var DEV_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_DEV_NAME&#x22;, &#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var APP_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_APP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var CERT_NAME &#x3d; getVariable&#x28;&#x22;EBAY_PROD_CERT_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var eBayAuthToken &#x3d; getVariable&#x28;&#x22;EBAY_PROD_AUTH_TOKEN&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var shopping_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_SHOPPING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var trading_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_TRADING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var finding_api_url &#x3d; getVariable&#x28;&#x22;EBAY_PROD_FINDING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d; else &#x7b;&#xd;&#xa;	var DEV_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_DEV_NAME&#x22;, &#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var APP_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_APP_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var CERT_NAME &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_CERT_NAME&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var eBayAuthToken &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_AUTH_TOKEN&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var shopping_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_SHOPPING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var trading_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_TRADING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;	var finding_api_url &#x3d; getVariable&#x28;&#x22;EBAY_SANBOX_FINDING_API_URL&#x22;,&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#x2f;&#x2f; Local based variables&#xd;&#xa;var SERVICE_VERSION&#x3d;&#x22;1.8.0&#x22;&#x3b;&#xd;&#xa;var endpoint &#x3d; &#x22;findItemsIneBayStores&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;var operation&#x3d;&#x22;&#x3f;OPERATION-NAME&#x3d;&#x22; &#x2b; endpoint &#x2b; &#x22;&#x26;SERVICE-VERSION&#x3d;1.8.0&#x22;&#x3b;&#xd;&#xa;var query &#x3d; finding_api_url &#x2b; operation &#x2b; &#x22;&#x26;SECURITY-APPNAME&#x3d;&#x22; &#x2b; APP_NAME &#x2b; &#x22;&#x26;storeName&#x3d;&#x22; &#x2b; shop_name&#x3b;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>SITEID</name>
-        <rename>SITEID</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>COMPATIBILITY_LEVEL</name>
-        <rename>COMPATIBILITY_LEVEL</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ItemID</name>
-        <rename>ItemID</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>prod_flag</name>
-        <rename>prod_flag</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>shop_name</name>
-        <rename>shop_name</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>DEV_NAME</name>
-        <rename>DEV_NAME</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>APP_NAME</name>
-        <rename>APP_NAME</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>CERT_NAME</name>
-        <rename>CERT_NAME</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>eBayAuthToken</name>
-        <rename>eBayAuthToken</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>shopping_api_url</name>
-        <rename>shopping_api_url</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>trading_api_url</name>
-        <rename>trading_api_url</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>finding_api_url</name>
-        <rename>finding_api_url</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>SERVICE_VERSION</name>
-        <rename>SERVICE_VERSION</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>endpoint</name>
-        <rename>endpoint</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>query</name>
-        <rename>query</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>322</xloc>
       <yloc>174</yloc>
       <draw>Y</draw>
       </GUI>

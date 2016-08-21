@@ -120,10 +120,10 @@
     <server>&#x24;&#x7b;SHOP_AT_LEMO_SERVER&#x7d;</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>shopatlemo</database>
-    <port>5432</port>
-    <username>shopatlemo</username>
-    <password>Encrypted 2be98afc86aa7f2e4a00cba64c79fae8b</password>
+    <database>&#x24;&#x7b;SHOP_AT_LEMO_DB&#x7d;</database>
+    <port>&#x24;&#x7b;SHOP_AT_LEMO_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;SHOP_AT_LEMO_USER&#x7d;</username>
+    <password>&#x24;&#x7b;SHOP_AT_LEMO_PASSWD&#x7d;</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -131,7 +131,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;SHOP_AT_LEMO_PORT&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -146,6 +146,32 @@
   <hop> <from>Generate Rows 2</from><to>java script </to><enabled>Y</enabled> </hop>
   <hop> <from>java script </from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Generate Rows 2</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>109</xloc>
+      <yloc>257</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>GetSingleItem</name>
     <type>HTTP</type>
@@ -1308,32 +1334,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>355</xloc>
-      <yloc>257</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Generate Rows 2</name>
-    <type>RowGenerator</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>109</xloc>
       <yloc>257</yloc>
       <draw>Y</draw>
       </GUI>
