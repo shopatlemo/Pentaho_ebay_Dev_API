@@ -8,7 +8,7 @@
 * Download sun based java from https://java.com/en/download/
 * Please set java_home, pentaho_home directory appropriately
 * You need to signup and generate ebay keys for both sandbox and production  (https://go.developer.ebay.com/)
-* Once generated the ebay keys, you need to add them in kettle.properties (pentaho data integration)
+* Once generated the ebay keys, you need to add them in kettle.properties (pentaho data integration).  They are located in \<Pentaho Home DIr\>/.kettle directory
 
 * cut and paste the below lines into kettle.properties 
 * and add your keys from ebay website
