@@ -12,7 +12,7 @@
 
 * cut and paste the below lines into kettle.properties
 * ====================================================
-* #Mail 
+* # eMail 
 * EM_TO_ADDRESS=<your company email>
 * EM_FROM_ADDRESS=<your company email>
 * EM_FROM_NAME=<your email name>
@@ -45,7 +45,7 @@
 * EBAY_PROD_SHOPPING_API_URL=http://open.api.ebay.com/shopping
 * EBAY_PROD_FINDING_API_URL=http://svcs.ebay.com/services/search/FindingService/v1
 
-* #===================================================================================
+
 
 
 
