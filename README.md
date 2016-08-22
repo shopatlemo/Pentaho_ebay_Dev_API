@@ -24,10 +24,10 @@
 * EM_SUBJ_SUCCESS=OK
 * EM_SUBJ_FAIL=FAIL
 
-* #Ebay General Parameters.
+* #eBay General Parameters.
 * EBAY_SHOP_NAME=<Your shop Name>
 
-* # ebay API SandBox
+* # eBay API SandBox
 * EBAY_SANDBOX_DEV_NAME=<You Sandbox Dev ID>
 * EBAY_SANDBOX_APP_NAME=<Your Sandbox App ID>
 * EBAY_SANDBOX_CERT_NAME=<Your Sandbox Cert ID> 
@@ -37,7 +37,7 @@
 * EBAY_SANDBOX_FINDING_API_URL=http://svcs.sandbox.ebay.com/services/search/FindingService/v1
 
 
-* # ebay API Prod
+* # eBay API Prod
 * EBAY_PROD_DEV_NAME=<You Prod Dev ID>
 * EBAY_PROD_APP_NAME=<Your Prod App ID>
 * EBAY_PROD_CERT_NAME=<Your Prod Cert ID> 
