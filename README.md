@@ -1,4 +1,4 @@
-* Pentaho_ebay_Dev_API
+* Pentaho eBay API for Merchants.
 * This is for eBay API designed in Pentaho Kettle.  
 * Use to Integerate for small/middle/large merchants who does business with eBay from backend
 * This example contains Trading API, Shopping API and Finding API
@@ -27,7 +27,7 @@
 * #eBay General Parameters.
 * EBAY_SHOP_NAME=\<Your shop Name\>
 
-* # eBay API SandBox
+* #eBay API SandBox
 * EBAY_SANDBOX_DEV_NAME=\<You Sandbox Dev ID\>
 * EBAY_SANDBOX_APP_NAME=\<Your Sandbox App ID\>
 * EBAY_SANDBOX_CERT_NAME=\<Your Sandbox Cert ID\> 
