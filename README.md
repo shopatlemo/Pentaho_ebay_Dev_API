@@ -10,8 +10,9 @@
 * You need to signup and generate ebay keys for both sandbox and production  (https://go.developer.ebay.com/)
 * Once generated the ebay keys, you need to add them in kettle.properties (pentaho data integration)
 
-* cut and paste the below lines into kettle.properties and add your keys from ebay website
-* ========================================================================================
+* cut and paste the below lines into kettle.properties 
+* and add your keys from ebay website
+* ====================================================
 * # eMail 
 * EM_TO_ADDRESS=<your company email>
 * EM_FROM_ADDRESS=<your company email>
