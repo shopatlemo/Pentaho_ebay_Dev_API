@@ -6,7 +6,7 @@
 * Pre-requisites:
 * You need Pentaho community edition software  (download from http://community.pentaho.com/  --> data integration)
 * Download sun based java from https://java.com/en/download/
-* Please set java_home, pentaho_home directory appropriately
+* Please set java_home, kettle_home directory appropriately.  Kettle_home is the directory where you installed pentaho.  This is where your kettle.properties file will be created.
 * You need to signup and generate ebay keys for both sandbox and production  (https://go.developer.ebay.com/)
 * Once generated the ebay keys, you need to add them in kettle.properties file (pentaho data integration).  They are located in \<Pentaho Home DIr\>/.kettle directory
 
