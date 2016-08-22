@@ -1,6 +1,6 @@
 * Pentaho_ebay_Dev_API
 * This is for eBay API designed in Pentaho Kettle.  
-* Use to Integerate for small/middle/large merchants who does business with eBay
+* Use to Integerate for small/middle/large merchants who does business with eBay from backend
 * This example contains Trading API, Shopping API and Finding API
 
 * Pre-requisites:
