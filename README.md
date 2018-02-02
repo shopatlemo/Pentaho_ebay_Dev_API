@@ -36,6 +36,7 @@
 * EBAY_SANDBOX_SHOPPING_API_URL=http://open.api.sandbox.ebay.com/shopping
 * EBAY_SANDBOX_FINDING_API_URL=http://svcs.sandbox.ebay.com/services/search/FindingService/v1
 
+test
 
 * # eBay API Prod
 * EBAY_PROD_DEV_NAME=\<You Prod Dev ID\>
