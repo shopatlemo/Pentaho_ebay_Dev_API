@@ -46,4 +46,3 @@
 * EBAY_PROD_SHOPPING_API_URL=http://open.api.ebay.com/shopping
 * EBAY_PROD_FINDING_API_URL=http://svcs.ebay.com/services/search/FindingService/v1
 
-# Integrate to Jenkins test
